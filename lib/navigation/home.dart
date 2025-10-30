@@ -156,17 +156,114 @@ class MyHomePage extends StatelessWidget {
                 Container(height: 6, color: Colors.white),
                 Expanded(
                   child: Container(
-                    color: Colors.purple,
-                    child: Column(children: [
-                    // body
-                    Expanded(child: Container(),),
-                    // navigation
-                    Container(
-                      height: 100,
-                      color: Colors.amber,
-                    )
-                  ],
-                ),
+                    // color: Colors.purple,
+                    child: Column(
+                      children: [
+                        // body
+                        Expanded(child: Container()),
+                        // navigation
+                        Container(
+                          height: 100,
+                          color: Color.fromARGB(75, 168, 240, 218),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/home');
+                                    },
+                                    icon: const Icon(
+                                      Icons.home,
+                                      size: 30,
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/donasi');
+                                    },
+                                    icon: const Icon(
+                                      Icons.volunteer_activism,
+                                      size: 30,
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Donasi',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/info');
+                                    },
+                                    icon: const Icon(
+                                      Icons.info,
+                                      size: 30,
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Info',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/profil');
+                                    },
+                                    icon: const Icon(
+                                      Icons.person,
+                                      size: 30,
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Profil',
+                                    style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
