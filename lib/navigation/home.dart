@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/latest.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/message.dart';
 import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/profile.dart';
-// import 'home.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -13,6 +13,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+
+  // static const TextStyle optionStyle = TextStyle(
+  //   fontSize: 30,
+  //   fontWeight: FontWeight.bold,
+  // );
+  static const List<Widget> _widgetOptions = <Widget>[
+    MyHomePage(),
+    LatestNews(),
+    Message(),
+    AccountProfile()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -182,6 +193,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Container(
                           height: 100,
                           // color: Color(0xFF),
+                          child: Center(
+                            child: _widgetOptions.elementAt(_selectedIndex)
+                          ),
                         ),
                       ],
                     ),
@@ -192,22 +206,19 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: const Color(0xFF76A39D),
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifikasi',
+            icon: Icon(Icons.message_outlined),
+            label: 'home',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Pesan'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'home'),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.black,
+        onTap: _onItemTapped,
       ),
     );
   }

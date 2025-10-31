@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/latest.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/message.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/profile.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    const MyHomePage(),
+    const LatestNews(),
+    const Message(),
+    const AccountProfile(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -18,140 +29,182 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF4F5F7),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF76A39D),
-        elevation: 0,
-        title: const Text(
-          'Berbagi Kasih',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.white),
-            onPressed: () {},
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(appBar: AppBar(
+        centerTitle: false,
+        title: Row(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Salam pengguna
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Selamat Datang, [Nama Pengguna]!',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+            Image.asset("assets/image/health.png", height: 40),
+            const SizedBox(width: 8),
+            RichText(
+              text: TextSpan(
+                text: "Layanan Sosial\n",
+                style: GoogleFonts.acme(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF4F80FF),
                 ),
-                const CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage('assets/image/profile.png'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            // Card Donasi Mendesak
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: const Color(0xFFD8F3DC),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Row(
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Donasi Mendesak:',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 15),
-                        ),
-                        const Text('Bantu Korban Bencana!'),
-                        const SizedBox(height: 6),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFE63946),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text('Donasi Sekarang'),
-                        ),
-                      ],
+                  TextSpan(
+                    text: "untuk Kaum Dhuafa",
+                    style: GoogleFonts.abel(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w100,
+                      color: Colors.white,
                     ),
-                  ),
-                  Image.asset(
-                    'assets/image/donasi.png',
-                    height: 70,
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
-
-            // Menu Grid
-            GridView.count(
-              crossAxisCount: 4,
-              shrinkWrap: true,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                _menuButton(Icons.volunteer_activism, 'Permohonan\nBantuan'),
-                _menuButton(Icons.group, 'Cari\nRelawan'),
-                _menuButton(Icons.info_outline, 'Informasi\nProgram'),
-                _menuButton(Icons.article_outlined, 'Berita &\nUpdate'),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            // Layanan Terdekat
-            const Text(
-              'Layanan Terdekat',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                _serviceCard('Panti Asuhan Kasih Ibu'),
-                _serviceCard('Klinik Sehat Bersama'),
-                _serviceCard('Klinik Sentosa'),
-                _serviceCard('Purgima Bersaudara'),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            // Statistik Anda
-            const Text(
-              'Statistik Anda',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _statCard('Jumlah Donasi', '75%', Colors.orange),
-                _statCard('Jam Kerelawanan', '120 Jam', Colors.teal),
-              ],
-            ),
           ],
         ),
-      ),
 
-      // Bottom Navigation Bar
+        backgroundColor: Color(0xFF116686),
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: ClipPathClass(),
+            child: Container(
+              height: 200,
+              width: double.infinity,
+              color: Color(0xFF116686),
+            ),
+          ),
+          IndexedStack(
+            index: _selectedIndex,
+        children: _pages,
+          ),
+
+          Container(
+            margin: EdgeInsets.only(top: 70),
+            child: Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 20),
+                        Container(
+                          height: 130,
+                          // width: 300,
+                          margin: const EdgeInsets.only(top: 16, right: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          // color: Colors.green,
+                          child: LayoutBuilder(
+                            builder: (context, Constraints) => Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Image.asset(
+                                    "assets/image/poster1.png",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 130,
+                          // width: 300,
+                          margin: const EdgeInsets.only(top: 16, right: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          // color: Colors.green,
+                          child: LayoutBuilder(
+                            builder: (context, Constraints) => Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Image.asset(
+                                    "assets/image/poster2.png",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 130,
+                          // width: 300,
+                          margin: const EdgeInsets.only(top: 16, right: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          // color: Colors.green,
+                          child: LayoutBuilder(
+                            builder: (context, Constraints) => Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Image.asset(
+                                    "assets/image/poster3.png",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(height: 6, color: Colors.white),
+                Expanded(
+                  child: Container(
+                    color: Colors.purple,
+                    child: Column(
+                      children: [
+                        // body
+                        Expanded(child: Container()),
+                        // navigation
+                        Container(
+                          height: 100,
+                          // color: Color(0xFF),
+                          child: Center(
+                            // child: _widgetOptions.elementAt(_selectedIndex)
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -159,86 +212,33 @@ class _HomePageState extends State<HomePage> {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home), label: 'Beranda'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'Notifikasi'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notifikasi'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Pesan'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
         ],
       ),
     );
   }
+}
 
-  Widget _menuButton(IconData icon, String label) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFE3F2F1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: const Color(0xFF76A39D)),
-            const SizedBox(height: 6),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 11),
-            ),
-          ],
-        ),
-      ),
+class ClipPathClass extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height - 60);
+    path.quadraticBezierTo(
+      size.width / 2,
+      size.height,
+      size.width,
+      size.height - 60,
     );
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
   }
 
-  Widget _serviceCard(String title) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFDFDFD),
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 3, offset: Offset(1, 1))
-        ],
-      ),
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-      ),
-    );
-  }
-
-  Widget _statCard(String title, String value, Color color) {
-    return Container(
-      width: 150,
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFDFDFD),
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 60,
-            width: 60,
-            child: CircularProgressIndicator(
-              value: 0.75,
-              color: color,
-              backgroundColor: Colors.grey.shade200,
-              strokeWidth: 6,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(title,
-              style:
-                  const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
-          Text(value, style: TextStyle(color: color, fontSize: 13)),
-        ],
-      ),
-    );
-  }
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
