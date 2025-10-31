@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'latest.dart';
-import 'message.dart';
-import 'profile.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/latest.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/profile.dart';
+// import 'home.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,12 +182,6 @@ class MyHomePage extends StatelessWidget {
                         Container(
                           height: 100,
                           // color: Color(0xFF),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [NavigationBar(
-                              
-                            )],
-                          ),
                         ),
                       ],
                     ),
@@ -184,73 +192,23 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
 
-class NavigationBar extends StatefulWidget {
-  const NavigationBar({super.key});
-
-  @override
-  State<NavigationBar> createState() => _NavigationBarState();
-}
-
-class _NavigationBarState extends State<NavigationBar> {
-  int _selectedIndex = 0;
-
-  final List<Widget> pages = [
-    MyHomePage(),
-    LatestNews(),
-    Message(),
-    AccountProfile(),
-  ];
-
-  void onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: pages[_selectedIndex],
-      bottomNavigationBar: Container(
-        height: 30,
-        // color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // 🔹 HOME
-            navItem(Icons.home, "Home", 0),
-            // 🔹 DONASI
-            navItem(Icons.volunteer_activism, "Donasi", 1),
-            // 🔹 INFO
-            navItem(Icons.info, "Info", 2),
-            // 🔹 PROFIL
-            navItem(Icons.person, "Profil", 3),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: const Color(0xFF76A39D),
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifikasi',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Pesan'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+        ],
       ),
-    );
-  }
-
-  Widget navItem(IconData icon, String label, int index) {
-    final isActive = _selectedIndex == index;
-    final color = isActive ? Colors.blue : Colors.blueGrey;
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: () => onItemTapped(index),
-          icon: Icon(icon, size: 30, color: color),
-        ),
-        Text(
-          label,
-          style: TextStyle(color: color, fontSize: 12),
-        ),
-      ],
     );
   }
 }
