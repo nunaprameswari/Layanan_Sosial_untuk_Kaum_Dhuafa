@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/latest.dart';
-import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/message.dart';
-import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/profile.dart';
+import 'profile.dart';
+import 'message.dart';
+import 'latest.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -14,15 +14,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  // static const TextStyle optionStyle = TextStyle(
-  //   fontSize: 30,
-  //   fontWeight: FontWeight.bold,
-  // );
-  static const List<Widget> _widgetOptions = <Widget>[
-    MyHomePage(),
+  final List<Widget> _pages = const [
+    DasboardHome(),
     LatestNews(),
     Message(),
-    AccountProfile()
+    AccountProfile(),
   ];
 
   void _onItemTapped(int index) {
@@ -30,6 +26,33 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
     });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: const Color(0xFF116686),
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notifikasi'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Pesan'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+        ],
+      ),
+    );
+  }
+}
+
+class DasboardHome extends StatelessWidget {
+  const DasboardHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -189,14 +212,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         // body
                         Expanded(child: Container()),
-                        // navigation
-                        Container(
-                          height: 100,
-                          // color: Color(0xFF),
-                          child: Center(
-                            child: _widgetOptions.elementAt(_selectedIndex)
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -205,20 +220,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_outlined),
-            label: 'home',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'home'),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        onTap: _onItemTapped,
       ),
     );
   }
