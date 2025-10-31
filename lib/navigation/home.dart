@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'latest.dart';
+import 'message.dart';
+import 'profile.dart';
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -156,7 +159,7 @@ class MyHomePage extends StatelessWidget {
                 Container(height: 6, color: Colors.white),
                 Expanded(
                   child: Container(
-                    // color: Colors.purple,
+                    color: Colors.purple,
                     child: Column(
                       children: [
                         // body
@@ -164,102 +167,12 @@ class MyHomePage extends StatelessWidget {
                         // navigation
                         Container(
                           height: 100,
-                          color: Color.fromARGB(75, 168, 240, 218),
+                          // color: Color(0xFF),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, '/home');
-                                    },
-                                    icon: const Icon(
-                                      Icons.home,
-                                      size: 30,
-                                      color: Colors.blueGrey,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Home',
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, '/donasi');
-                                    },
-                                    icon: const Icon(
-                                      Icons.volunteer_activism,
-                                      size: 30,
-                                      color: Colors.blueGrey,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Donasi',
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, '/info');
-                                    },
-                                    icon: const Icon(
-                                      Icons.info,
-                                      size: 30,
-                                      color: Colors.blueGrey,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Info',
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, '/profil');
-                                    },
-                                    icon: const Icon(
-                                      Icons.person,
-                                      size: 30,
-                                      color: Colors.blueGrey,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Profil',
-                                    style: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                            children: [NavigationBar(
+                              
+                            )],
                           ),
                         ),
                       ],
@@ -271,6 +184,73 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class NavigationBar extends StatefulWidget {
+  const NavigationBar({super.key});
+
+  @override
+  State<NavigationBar> createState() => _NavigationBarState();
+}
+
+class _NavigationBarState extends State<NavigationBar> {
+  int _selectedIndex = 0;
+
+  final List<Widget> pages = [
+    MyHomePage(),
+    LatestNews(),
+    Message(),
+    AccountProfile(),
+  ];
+
+  void onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: pages[_selectedIndex],
+      bottomNavigationBar: Container(
+        height: 30,
+        // color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // 🔹 HOME
+            navItem(Icons.home, "Home", 0),
+            // 🔹 DONASI
+            navItem(Icons.volunteer_activism, "Donasi", 1),
+            // 🔹 INFO
+            navItem(Icons.info, "Info", 2),
+            // 🔹 PROFIL
+            navItem(Icons.person, "Profil", 3),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget navItem(IconData icon, String label, int index) {
+    final isActive = _selectedIndex == index;
+    final color = isActive ? Colors.blue : Colors.blueGrey;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: () => onItemTapped(index),
+          icon: Icon(icon, size: 30, color: color),
+        ),
+        Text(
+          label,
+          style: TextStyle(color: color, fontSize: 12),
+        ),
+      ],
     );
   }
 }
