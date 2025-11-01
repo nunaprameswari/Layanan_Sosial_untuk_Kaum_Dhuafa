@@ -30,10 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _pages,
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _pages),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -42,8 +39,11 @@ class _MyHomePageState extends State<MyHomePage> {
         showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notifikasi'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Pesan'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.newspaper_sharp),
+            label: 'Berita',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
         ],
       ),
@@ -207,11 +207,38 @@ class DasboardHome extends StatelessWidget {
                 Container(height: 6, color: Colors.white),
                 Expanded(
                   child: Container(
-                    color: Colors.purple,
+                    // color: Colors.purple,
                     child: Column(
                       children: [
                         // body
-                        Expanded(child: Container()),
+                        Expanded(
+                          child: Container(
+                            child: ListView(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              children: [
+                                SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    _menuButton(
+                                      Icons.local_hospital_rounded,
+                                      "Info Rumah\nSakit",
+                                    ),
+                                    _menuButton(
+                                      Icons.group,
+                                      "Konsultasi",
+                                    ),
+                                    _menuButton(
+                                      Icons.dangerous_outlined,
+                                      "SOS",
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -221,6 +248,30 @@ class DasboardHome extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _menuButton(IconData icon, String label) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 70,
+          width: 70,
+          decoration: BoxDecoration(
+            color: const Color(0xFFEAF4F3),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(icon, color: const Color(0xFF116686),),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 12, color: Colors.black87),
+        ),
+      ],
     );
   }
 }

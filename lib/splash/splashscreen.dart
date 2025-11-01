@@ -1,16 +1,15 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:layanan_sosial_untuk_kaum_dhuafa/navigation/home.dart';
 
-class Splashscreen extends StatefulWidget {
-  const Splashscreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<Splashscreen> createState() => _SplashscreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashscreenState extends State<Splashscreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -26,13 +25,13 @@ class _SplashscreenState extends State<Splashscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFEBDEBF2),
-      body: Center(
-        child: Container(
-          width: 450,
-          height: 450,
-          child: Image.asset("assets/image/splash.png"),
+        body: Center(
+          child: Container(
+            width: 450,
+            height: 450,
+            child: Image.asset("assets/image/splash.png"),
+          ),
         ),
-      ),
-    );
+      );
   }
 }
