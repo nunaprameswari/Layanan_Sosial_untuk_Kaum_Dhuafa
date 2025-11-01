@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'profile.dart';
 import 'message.dart';
 import 'latest.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/bottom/danger.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/bottom/doctor.dart';
+import 'package:layanan_sosial_untuk_kaum_dhuafa/bottom/rs.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -103,7 +106,7 @@ class DasboardHome extends StatelessWidget {
           ),
 
           Container(
-            margin: EdgeInsets.only(top: 70),
+            margin: EdgeInsets.only(top: 30),
             child: Column(
               children: [
                 SingleChildScrollView(
@@ -223,12 +226,18 @@ class DasboardHome extends StatelessWidget {
                                   children: [
                                     _menuButton(
                                       Icons.local_hospital_rounded,
-                                      "Info Rumah\nSakit",
+                                      "Info Rumah\nSakit", () {
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RumahSakit()));
+                                      }
                                     ),
-                                    _menuButton(Icons.group, "Konsultasi"),
+                                    _menuButton(Icons.group, "Konsultasi", () {
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Consultation()));
+                                      }),
                                     _menuButton(
                                       Icons.dangerous_outlined,
-                                      "SOS",
+                                      "SOS", () {
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Dangers()));
+                                      }
                                     ),
                                   ],
                                 ),
@@ -245,11 +254,22 @@ class DasboardHome extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    Text(
-                                      "Lihat Semua",
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
+                                    GestureDetector(
+                                      onTap: () {
+                                        // Navigasi ke halaman berita
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => LatestNews(),
+                                          ), // ganti dengan nama halaman kamu
+                                        );
+                                      },
+                                      child: Text(
+                                        "Lihat Semua",
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -296,88 +316,90 @@ class DasboardHome extends StatelessWidget {
     );
   }
 
-  Widget _menuButton(IconData icon, String label) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 70,
-          width: 70,
-          decoration: BoxDecoration(
-            color: const Color(0xFFEAF4F3),
-            borderRadius: BorderRadius.circular(12),
+  Widget _menuButton(IconData icon, String label, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: 70,
+            width: 70,
+            decoration: BoxDecoration(
+              color: const Color(0xFFEAF4F3),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: const Color(0xFF116686)),
           ),
-          child: Icon(icon, color: const Color(0xFF116686)),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 12, color: Colors.black87),
-        ),
-      ],
+          const SizedBox(height: 5),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12, color: Colors.black87),
+          ),
+        ],
+      ),
     );
   }
 
   Widget beritaCard(String imagePath, String title) {
-  return GestureDetector(
-    onTap: () {
-      // Navigasi ke halaman detail berita
-      // Ganti dengan halaman kamu sendiri
-      print("Berita diklik: $title");
-    },
-    child: Container(
-      width: 220,
-      margin: const EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 🔹 Gambar berita
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(14),
-              topRight: Radius.circular(14),
+    return GestureDetector(
+      onTap: () {
+        // Navigasi ke halaman detail berita
+        // Ganti dengan halaman kamu sendiri
+        print("Berita diklik: $title");
+      },
+      child: Container(
+        width: 220,
+        margin: const EdgeInsets.only(right: 12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 4,
+              offset: Offset(0, 2),
             ),
-            child: Image.asset(
-              imagePath,
-              height: 110,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // 🔹 Judul berita
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 🔹 Gambar berita
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(14),
+                topRight: Radius.circular(14),
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+              child: Image.asset(
+                imagePath,
+                height: 110,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
+            // 🔹 Judul berita
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class ClipPathClass extends CustomClipper<Path> {
