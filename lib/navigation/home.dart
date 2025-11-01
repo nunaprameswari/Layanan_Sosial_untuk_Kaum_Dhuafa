@@ -227,16 +227,16 @@ class DasboardHome extends StatelessWidget {
                                     _menuButton(
                                       Icons.local_hospital_rounded,
                                       "Info Rumah\nSakit", () {
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RumahSakit()));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => const RumahSakit()));
                                       }
                                     ),
                                     _menuButton(Icons.group, "Konsultasi", () {
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Consultation()));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Consultation()));
                                       }),
                                     _menuButton(
                                       Icons.dangerous_outlined,
                                       "SOS", () {
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Dangers()));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Dangers()));
                                       }
                                     ),
                                   ],
