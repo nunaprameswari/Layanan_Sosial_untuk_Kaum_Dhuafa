@@ -225,15 +225,60 @@ class DasboardHome extends StatelessWidget {
                                       Icons.local_hospital_rounded,
                                       "Info Rumah\nSakit",
                                     ),
-                                    _menuButton(
-                                      Icons.group,
-                                      "Konsultasi",
-                                    ),
+                                    _menuButton(Icons.group, "Konsultasi"),
                                     _menuButton(
                                       Icons.dangerous_outlined,
                                       "SOS",
                                     ),
                                   ],
+                                ),
+                                SizedBox(height: 20),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Berita Terkini",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Lihat Semua",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 14),
+
+                                SizedBox(
+                                  height: 180,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      beritaCard(
+                                        "assets/image/poster1.png",
+                                        "Update Donasi Korban Bencana Alam",
+                                      ),
+                                      beritaCard(
+                                        "assets/image/poster2.png",
+                                        "Relawan untuk Program Bakti Sosial",
+                                      ),
+                                      beritaCard(
+                                        "assets/image/poster3.png",
+                                        "Program Beasiswa Anak Dhuafa",
+                                      ),
+                                      beritaCard(
+                                        "assets/image/poster1.png",
+                                        "Kegiatan Donor Darah Bersama",
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -263,7 +308,7 @@ class DasboardHome extends StatelessWidget {
             color: const Color(0xFFEAF4F3),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(icon, color: const Color(0xFF116686),),
+          child: Icon(icon, color: const Color(0xFF116686)),
         ),
         const SizedBox(height: 5),
         Text(
@@ -274,6 +319,65 @@ class DasboardHome extends StatelessWidget {
       ],
     );
   }
+
+  Widget beritaCard(String imagePath, String title) {
+  return GestureDetector(
+    onTap: () {
+      // Navigasi ke halaman detail berita
+      // Ganti dengan halaman kamu sendiri
+      print("Berita diklik: $title");
+    },
+    child: Container(
+      width: 220,
+      margin: const EdgeInsets.only(right: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 🔹 Gambar berita
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(14),
+              topRight: Radius.circular(14),
+            ),
+            child: Image.asset(
+              imagePath,
+              height: 110,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          // 🔹 Judul berita
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 }
 
 class ClipPathClass extends CustomClipper<Path> {
