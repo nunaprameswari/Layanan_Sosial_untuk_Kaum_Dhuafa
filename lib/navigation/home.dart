@@ -282,19 +282,19 @@ class DasboardHome extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     children: [
                                       beritaCard(
-                                        "assets/image/poster1.png",
+                                        "assets/image/korban_bencana.jpeg",
                                         "Update Donasi Korban Bencana Alam",
                                       ),
                                       beritaCard(
-                                        "assets/image/poster2.png",
+                                        "assets/image/relawan_bs.jpg",
                                         "Relawan untuk Program Bakti Sosial",
                                       ),
                                       beritaCard(
-                                        "assets/image/poster3.png",
-                                        "Program Beasiswa Anak Dhuafa",
+                                        "assets/image/beasiswa.jpeg",
+                                        "Program Beasiswa Anak Yatim & Dhuafa",
                                       ),
                                       beritaCard(
-                                        "assets/image/poster1.png",
+                                        "assets/image/donor_darah.png",
                                         "Kegiatan Donor Darah Bersama",
                                       ),
                                     ],

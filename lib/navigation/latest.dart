@@ -13,25 +13,25 @@ class _LatestNewsState extends State<LatestNews> {
       'judul': 'Update Donasi Korban Bencana Alam',
       'penulis': 'Renat Mitsuth',
       'waktu': '2 jam lalu',
-      'gambar': 'assets/image/poster1.png'
+      'gambar': 'assets/image/korban_bencana.jpeg'
     },
     {
       'judul': 'Panggilan Relawan untuk Program "Bakti Sosial Kasih"',
       'penulis': 'Renat Mitsuth',
       'waktu': '2 jam lalu',
-      'gambar': 'assets/image/poster2.png'
+      'gambar': 'assets/image/relawan_bs.jpg'
     },
     {
-      'judul': 'Panggilan Relawan untuk "Bakti Anak Dhuasih"',
+      'judul': 'Kegiatan Donor Darah Bersama"',
       'penulis': 'Renat Mitsuth',
       'waktu': '2 jam lalu',
-      'gambar': 'assets/image/poster3.png'
+      'gambar': 'assets/image/donor_darah.jpeg'
     },
     {
-      'judul': 'Peluncaran Program Beasiswa Anak Dhuafa',
+      'judul': 'Peluncaran Program Beasiswa Anak Yatim & Dhuafa',
       'penulis': 'Ranngal Ilaudin',
       'waktu': '1 jam lalu',
-      'gambar': 'assets/image/poster1.png'
+      'gambar': 'assets/image/beasiswa.jpeg'
     },
   ];
 
