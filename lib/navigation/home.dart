@@ -294,7 +294,7 @@ class DasboardHome extends StatelessWidget {
                                         "Program Beasiswa Anak Yatim & Dhuafa",
                                       ),
                                       beritaCard(
-                                        "assets/image/donor_darah.png",
+                                        "assets/image/donor_darah.jpeg",
                                         "Kegiatan Donor Darah Bersama",
                                       ),
                                     ],

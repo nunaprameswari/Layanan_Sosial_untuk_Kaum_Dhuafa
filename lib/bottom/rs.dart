@@ -268,11 +268,12 @@ class _DetailBeritaPageState extends State<DetailBeritaPage> {
 
   final List<Map<String, dynamic>> rooms = [
     {
-      'image': 'assets/image/RS_slamet.jpeg',
       'name': 'RSUD Dr. H. Slamet Martodirdjo (RSUD Smart)',
-      'type': 'Umum',
-      'rating': '7.7',
-      'distance': '1.1 km',
+      'category': 'Rumah Sakit Umum',
+      'rating': '4.4',
+      'address': 'Jl. Raya Panglegur No. 4, Kramat...',
+      'distance': '5.8 km',
+      'image': 'assets/image/RS_slamet.jpeg',
     },
   ];
 
@@ -351,7 +352,7 @@ class _DetailBeritaPageState extends State<DetailBeritaPage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.asset(
-                      'assets/rs1.jpg',
+                      'assets/image/RS_slamet.jpeg',
                       width: 60,
                       height: 60,
                       fit: BoxFit.cover,
@@ -363,7 +364,7 @@ class _DetailBeritaPageState extends State<DetailBeritaPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "RS Mitra Keluarga",
+                          "RSUD Dr. H. Slamet Martodirdjo (RSUD Smart)",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -466,7 +467,7 @@ class _DetailBeritaPageState extends State<DetailBeritaPage> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
-                              room['image']!,
+                              room['gambar']!,
                               width: 60,
                               height: 60,
                               fit: BoxFit.cover,
@@ -478,7 +479,7 @@ class _DetailBeritaPageState extends State<DetailBeritaPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "RS Mitra Keluarga",
+                                "RSUD Dr. H. Slamet Martodirdjo (RSUD Smart)",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey[600],
